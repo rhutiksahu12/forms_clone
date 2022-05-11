@@ -10,7 +10,7 @@ function App() {
       <h1>Hello World</h1>
       {/* <Form /> */}
       <Question />
-      <Answer />
+      {/* <Answer /> */}
     </div>
   );
 }

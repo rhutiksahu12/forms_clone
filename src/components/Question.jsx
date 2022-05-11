@@ -1,33 +1,32 @@
 import React from 'react'
 import { useState } from 'react'
+import Answer from './Answer';
 
-
-const data = { question: '', QuestionType: ['checkbox', 'radio', 'textarea'] }
+const questionType = ['checkbox', 'radio', 'textarea']
+const data = { questiontext: '', QuestionType: '' }
 
 const Question = () => {
 
     const [question, setQuestion] = useState(data);
-    console.log(question.QuestionType)
+    // console.log(question.QuestionType)
 
     return (
 
         <div>
             <div className="input-group mb-3">
                 <span className="input-group-text" >Question</span>
-                <input type="text" value={question.Question} onChange={(e) => setQuestion({ ...question, Question: e.target.value })} className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+                <input type="text" value={question.Question} onChange={(e) => setQuestion({ ...question, questiontext: e.target.value })} className="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
             </div>
             <div>{question.Question}</div>
-            {
-                question ? console.log(question.QuestionType) : console.log('no question')
-            }
-            <select className="form-select form-select-sm" aria-label=".form-select-sm example"  >
-                {question.QuestionType.map((questiontype) => (
-                    <option value={question.QuestionType} onchange={(e) => setQuestion({ ...question, QuestionType: e.target.value })}>{questiontype}</option>
 
-
+            <select className="form-select form-select-sm mb-3" aria-label=".form-select-sm example" onChange={(e) => {
+                setQuestion({ ...question, QuestionType: e.target.value })}}>
+                {questionType.map((type) => (
+                    <option key={type} value={type}  >{type}</option>
                 ))}
             </select>
-
+            <Answer QuestionType={question.QuestionType} />
+        
         </div>
     )
 }
